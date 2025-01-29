@@ -1,58 +1,69 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 function renderCartContents() {
-  const cartItems = getLocalStorage("so-cart");
-  //const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  //document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  const cartItems = getLocalStorage("so-cart") || [];
   const cartList = document.querySelector(".product-list");
 
-  if (cartItems && cartItems.length > 0) {
-    cartItems.forEach(item => {
-      cartList.innerHTML += cartItemTemplate(item);
-    });
+  if (cartItems.length > 0) {
+    // Build and set HTML in one go
+    const htmlItems = cartItems.map((item, index) => cartItemTemplate(item, index)).join("");
+    cartList.innerHTML = htmlItems;
+  } else {
+    cartList.innerHTML = "<p>Your cart is empty.</p>";
   }
+
+  attachRemoveHandlers();
+}
+
+function attachRemoveHandlers() {
+  const removeButtons = document.querySelectorAll(".remove-item-btn");
+  removeButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      const index = event.target.dataset.index;
+      removeCartItem(index);
+    });
+  });
+}
+
+function removeCartItem(index) {
+  let cartItems = getLocalStorage("so-cart") || [];
+  cartItems.splice(index, 1); // Remove the selected item
+  setLocalStorage("so-cart", cartItems);
+  renderCartContents();
+  updateCartFooter();
 }
 
 function updateCartFooter() {
-  const cartItems = getLocalStorage("so-cart");
+  const cartItems = getLocalStorage("so-cart") || [];
+  const cartFooter = document.querySelector(".cart-footer");
 
-  if (cartItems && cartItems.length > 0) {
-    // Show the cart-footer element
-    document.querySelector(".cart-footer").classList.remove("hide");
+  if (cartItems.length > 0) {
+    cartFooter.classList.remove("hide");
 
-    // Calculate the total price
+    // Calculate and update total price
     const totalPrice = cartItems.reduce((total, item) => total + item.FinalPrice, 0);
-
-    // Update the total price in the cart-footer element
     document.querySelector(".cart-total").textContent = `Total: $${totalPrice.toFixed(2)}`;
   } else {
-    // Hide the cart-footer element if the cart is empty
-    document.querySelector(".cart-footer").classList.add("hide");
+    cartFooter.classList.add("hide");
   }
 }
 
-function cartItemTemplate(item) {
-  const newItem = `<li class="cart-card divider">
-  <a href="#" class="cart-card__image">
-    <img
-      src="${item.Image}"
-      alt="${item.Name}"
-    />
-  </a>
-  <a href="#">
-    <h2 class="card__name">${item.Name}</h2>
-  </a>
-  <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: 1</p>
-  <p class="cart-card__price">$${item.FinalPrice}</p>
-</li>`;
-
-  return newItem;
+function cartItemTemplate(item, index) {
+  return `<li class="cart-card divider">
+    <a href="#" class="cart-card__image">
+      <img src="${item.Image}" alt="${item.Name}" />
+    </a>
+    <a href="#">
+      <h2 class="card__name">${item.Name}</h2>
+    </a>
+    <p class="cart-card__color">${item.Colors[0].ColorName}</p>
+    <p class="cart-card__quantity">qty: 1</p>
+    <p class="cart-card__price">$${item.FinalPrice}</p>
+    <button class="remove-item-btn" data-index="${index}">Remove</button>
+  </li>`;
 }
 
-//renderCartContents();
-
-// Call the functions to render cart contents and update the cart footer when the page loads
+// Initialize cart rendering
 document.addEventListener("DOMContentLoaded", () => {
   renderCartContents();
   updateCartFooter();
