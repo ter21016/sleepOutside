@@ -1,8 +1,10 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, animateCartIcon   } from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
   const cartList = document.querySelector(".product-list");
+
+  animateCartIcon();
 
   if (cartItems.length > 0) {
     // Build and set HTML in one go

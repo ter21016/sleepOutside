@@ -43,3 +43,14 @@ export function renderListWithTemplate(
   const htmlString = list.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlString.join(""));
 }
+
+export function animateCartIcon() {
+  const cartIcon = qs(".cart svg");
+  if (!cartIcon) return;
+
+  // Add bounce class and remove after animation
+  cartIcon.classList.add("cart-bounce-active");
+  setTimeout(() => {
+    cartIcon.classList.remove("cart-bounce-active");
+  }, 500);
+}
