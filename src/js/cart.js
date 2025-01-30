@@ -6,7 +6,9 @@ function renderCartContents() {
 
   if (cartItems.length > 0) {
     // Build and set HTML in one go
-    const htmlItems = cartItems.map((item, index) => cartItemTemplate(item, index)).join("");
+    const htmlItems = cartItems
+      .map((item, index) => cartItemTemplate(item, index))
+      .join("");
     cartList.innerHTML = htmlItems;
   } else {
     cartList.innerHTML = "<p>Your cart is empty.</p>";
@@ -41,8 +43,13 @@ function updateCartFooter() {
     cartFooter.classList.remove("hide");
 
     // Calculate and update total price
-    const totalPrice = cartItems.reduce((total, item) => total + item.FinalPrice, 0);
-    document.querySelector(".cart-total").textContent = `Total: $${totalPrice.toFixed(2)}`;
+    const totalPrice = cartItems.reduce(
+      (total, item) => total + item.FinalPrice,
+      0
+    );
+    document.querySelector(
+      ".cart-total"
+    ).textContent = `Total: $${totalPrice.toFixed(2)}`;
   } else {
     cartFooter.classList.add("hide");
   }
