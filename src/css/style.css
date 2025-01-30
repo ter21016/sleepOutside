@@ -91,6 +91,23 @@ button {
   font-size: var(--large-font);
   cursor: pointer;
 }
+
+/* Cart bounce animation */
+@keyframes cart-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.cart-bounce-active {
+  animation: cart-bounce 0.5s ease;
+}
+
+
+
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }
