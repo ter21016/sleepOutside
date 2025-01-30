@@ -1,6 +1,12 @@
 import { getData } from "./productData.mjs";
 import { renderListWithTemplate } from "./utils.mjs";
 
+const REQUIRED_TENT_IDS = ["880RR", "985RF", "985PR", "344YJ"];
+
+function filterTents(products) {
+  return products.filter(product => REQUIRED_TENT_IDS.includes(product.Id));
+}
+
 function productCardTemplate(product) {
   return `<li class="product-card">
     <a href="product_pages/index.html?product=${product.Id}">
@@ -17,6 +23,6 @@ function productCardTemplate(product) {
 export default async function productList(selector, category) {
   const el = document.querySelector(selector);
   const products = await getData(category);
-  console.log(products);
+  products = filterTents(products); // Filter the products 
   renderListWithTemplate(productCardTemplate, el, products);
 }
