@@ -253,3 +253,18 @@ footer {
   font-size: 1.2em;
   font-weight: bold;
 }
+
+/* alert style (add customizable indes.html */
+.alert-list {
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.alert-list p {
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  color: #cabb7f;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
