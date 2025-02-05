@@ -54,3 +54,8 @@ export function animateCartIcon() {
     cartIcon.classList.remove("cart-bounce-active");
   }, 500);
 }
+
+// Retrieve cart items from local storage
+export function getCartItems() {
+  return getLocalStorage("so-cart") || [];
+}
