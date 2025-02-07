@@ -1,6 +1,5 @@
-import { setLocalStorage, getLocalStorage, animateCartIcon} from "./utils.mjs";
+import { setLocalStorage, getLocalStorage, animateCartIcon, qs, setContent} from "./utils.mjs";
 import { findProductById } from "./productData.mjs";
-import { qs, setContent } from "./utils.mjs";
 
 function addProductToCart(product) {
   const currentCart = getLocalStorage("so-cart") || [];
