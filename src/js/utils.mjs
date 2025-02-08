@@ -59,3 +59,16 @@ export function animateCartIcon() {
 export function getCartItems() {
   return getLocalStorage("so-cart") || [];
 }
+
+// Function to get the number of items in the cart
+function getCartItemCount() {
+  const cartItems = getCartItems();
+  return cartItems.length;
+}
+
+// Function to update the cart count
+export function updateCartCount() {
+  const cartCountElement = document.querySelector(".cart-count");
+  const itemCount = getCartItemCount();
+  cartCountElement.textContent = itemCount;
+}
