@@ -54,3 +54,40 @@ export function animateCartIcon() {
     cartIcon.classList.remove("cart-bounce-active");
   }, 500);
 }
+
+export async function renderWithTemplate(
+  templateFn, parentElement, data, callback, position = "afterbegin", clear = true
+) {
+  if (clear) {
+    parentElement.innerHTML = "";
+  }
+
+  const htmlString = await templateFn(data);
+  parentElement.insertAdjacentHTML(position, htmlString);
+
+  if (callback) {
+     callback(data);
+     animateCartIcon();
+  }
+}
+
+export function loadTemplate(path) {
+  return async function () {
+    const res = await fetch(path);
+    if (res.ok) {
+      const html = await res.text();
+      return html;
+    }
+  };
+}
+
+export async function loadHeaderFooter() {
+  const headerTemplate = loadTemplate("/partials/header.html");
+  const footerTemplate = loadTemplate("/partials/footer.html");
+
+  const header = document.querySelector("#header");
+  const footer = document.querySelector("#footer");
+
+  renderWithTemplate(headerTemplate, header);
+  renderWithTemplate(footerTemplate, footer);
+}
