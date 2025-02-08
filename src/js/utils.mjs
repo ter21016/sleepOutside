@@ -65,13 +65,13 @@ export async function renderWithTemplate(
   const htmlString = await templateFn(data);
   parentElement.insertAdjacentHTML(position, htmlString);
 
-  // if (callback) {
-  //   callback(data);
-  //   animateCartIcon();
-  // }
+  if (callback) {
+     callback(data);
+     animateCartIcon();
+  }
 }
 
-function loadTemplate(path) {
+export function loadTemplate(path) {
   return async function () {
     const res = await fetch(path);
     if (res.ok) {
