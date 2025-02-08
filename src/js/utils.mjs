@@ -55,6 +55,7 @@ export function animateCartIcon() {
   }, 500);
 }
 
+
 export async function renderWithTemplate(
   templateFn, parentElement, data, callback, position = "afterbegin", clear = true
 ) {
@@ -91,3 +92,9 @@ export async function loadHeaderFooter() {
   renderWithTemplate(headerTemplate, header);
   renderWithTemplate(footerTemplate, footer);
 }
+
+// Retrieve cart items from local storage
+export function getCartItems() {
+  return getLocalStorage("so-cart") || [];
+}
+
