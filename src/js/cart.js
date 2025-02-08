@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage, animateCartIcon   } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, animateCartIcon, updateCartCount } from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
@@ -35,6 +35,7 @@ function removeCartItem(index) {
   setLocalStorage("so-cart", cartItems);
   renderCartContents();
   updateCartFooter();
+  updateCartCount();
 }
 
 function updateCartFooter() {
@@ -75,5 +76,6 @@ function cartItemTemplate(item, index) {
 // Initialize cart rendering
 document.addEventListener("DOMContentLoaded", () => {
   renderCartContents();
+  updateCartCount();
   updateCartFooter();
 });

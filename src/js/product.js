@@ -1,5 +1,8 @@
-import { getParam } from "./utils.mjs";
+import { getParam, updateCartCount} from "./utils.mjs";
 import productDetails from "./productDetails.mjs";
 
 const productId = getParam("product");
+updateCartCount();
 productDetails(productId);
+
+

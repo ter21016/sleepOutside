@@ -1,4 +1,4 @@
-import { setLocalStorage, getLocalStorage, animateCartIcon} from "./utils.mjs";
+import { setLocalStorage, getLocalStorage, animateCartIcon, updateCartCount} from "./utils.mjs";
 import { findProductById } from "./productData.mjs";
 import { qs, setContent } from "./utils.mjs";
 
@@ -9,6 +9,7 @@ function addProductToCart(product) {
 
   // Trigger cart icon animation
   animateCartIcon();
+  updateCartCount();
 }
 export default async function productDetails(productId) {
   const product = await findProductById(productId);
