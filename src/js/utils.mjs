@@ -82,6 +82,37 @@ export function loadTemplate(path) {
   };
 }
 
+// Retrieve cart items from local storage
+export function getCartItems() {
+  return getLocalStorage("so-cart") || [];
+}
+
+// Function to get the number of items in the cart
+function getCartItemCount() {
+  const cartItems = getCartItems();
+  return cartItems.length;
+}
+
+// Function to update the cart count
+// export function updateCartCount() {
+//   const cartCountElement = document.querySelector(".cart-count");
+//   const itemCount = getCartItemCount();
+//   cartCountElement.textContent = itemCount;
+// }
+
+export function updateCartCount() {
+  const cartCountElement = document.querySelector(".cart-count");
+  // eslint-disable-next-line no-console
+    console.log("Cart count element:", cartCountElement); // Debugging
+  if (cartCountElement) {
+    const itemCount = getCartItemCount();
+    // eslint-disable-next-line no-console
+    console.log("Item count:", itemCount); // Debugging
+    cartCountElement.textContent = itemCount;
+  }
+}
+
+
 export async function loadHeaderFooter() {
   const headerTemplate = loadTemplate("/partials/header.html");
   const footerTemplate = loadTemplate("/partials/footer.html");
@@ -89,12 +120,11 @@ export async function loadHeaderFooter() {
   const header = document.querySelector("#header");
   const footer = document.querySelector("#footer");
 
-  renderWithTemplate(headerTemplate, header);
-  renderWithTemplate(footerTemplate, footer);
+  await renderWithTemplate(headerTemplate, header);
+  await renderWithTemplate(footerTemplate, footer);
+
+  updateCartCount();
 }
 
-// Retrieve cart items from local storage
-export function getCartItems() {
-  return getLocalStorage("so-cart") || [];
-}
+
 
