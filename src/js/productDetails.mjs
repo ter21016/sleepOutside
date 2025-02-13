@@ -21,7 +21,7 @@ function renderProductDetails(product) {
   setContent("#productFinalPrice", product.FinalPrice);
   setContent("#productDescriptionHtmlSimple", product.DescriptionHtmlSimple);
   // set image src
-  qs("#productImage").setAttribute("src", product.Image);
+  qs("#productImage").setAttribute("src", product.Images.PrimaryLarge);
   // handle add to cart
   qs("#addToCart").addEventListener(
     "click",
