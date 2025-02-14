@@ -2,12 +2,12 @@ import { getData } from "./productData.mjs";
 import { renderListWithTemplate } from "./utils.mjs";
 
 // Tent IDs that we need to display
-const REQUIRED_TENT_IDS = ["880RR", "985RF", "985PR", "344YJ"];
+//const REQUIRED_TENT_IDS = ["880RR", "985RF", "985PR", "344YJ"];
 
 // Filter products to only include required tent IDs
-function filterTents(products) {
-  return products.filter(product => REQUIRED_TENT_IDS.includes(product.Id));
-}
+//function filterTents(products) {
+  //return products.filter(product => REQUIRED_TENT_IDS.includes(product.Id));
+//}
 
 // Template for each product card
 function productCardTemplate(product) {
@@ -28,6 +28,7 @@ function productCardTemplate(product) {
 export default async function productList(selector, category) {
   const el = document.querySelector(selector);
   let products = await getData(category); 
-  products = filterTents(products);      
+  //products = filterTents(products);      
   renderListWithTemplate(productCardTemplate, el, products); 
+  document.querySelector(".title").innerHTML = category;
 }
