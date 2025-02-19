@@ -12,11 +12,16 @@ export default function renderCartContents() {
       .map((item, index) => cartItemTemplate(item, index))
       .join("");
     cartList.innerHTML = htmlItems;
+
+    // Add checkout button
+    const checkoutButton = `<button class="checkout-btn">Checkout</button>`;
+    cartList.insertAdjacentHTML("beforeend", checkoutButton);
   } else {
     cartList.innerHTML = "<p>Your cart is empty.</p>";
   }
 
   attachRemoveHandlers();
+  attachCheckoutHandler();
 }
 
 function attachRemoveHandlers() {
@@ -27,6 +32,15 @@ function attachRemoveHandlers() {
       removeCartItem(index);
     });
   });
+}
+
+function attachCheckoutHandler() {
+  const checkoutButton = document.querySelector(".checkout-btn");
+  if (checkoutButton) {
+    checkoutButton.addEventListener("click", () => {
+      window.location.href = "../checkout/index.html";
+    });
+  }
 }
 
 function removeCartItem(index) {
