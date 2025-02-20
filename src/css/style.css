@@ -164,6 +164,24 @@ button {
   margin: 0.5em 0;
 }
 
+/* product-search*/
+
+#product-search {
+  width: 25%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 3px solid #525b0f;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+#product-search:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+
 .card__brand {
   font-size: var(--small-font);
 }
