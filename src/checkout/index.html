@@ -19,14 +19,14 @@
       <section class="products">
         <h2>Review & Place your Order</h2>
       </section>
-      <form class="checkout-form">
+      <form class="checkout-form" name="checkout-form">
         <fieldset>
           <legend>Shipping Information</legend>
           <label for="fname">First Name*</label>
           <input type="text" id="fname" name="fname" required />
           <label for="lname">Last Name*</label>
           <input type="text" id="lname" name="lname" required />
-          <label for="address">Street*</label>
+          <label for="street">Street*</label>
           <input type="text" id="street" name="street" required />
           <label for="city">City*</label>
           <input type="text" id="city" name="city" required />
@@ -46,13 +46,13 @@
           <input type="text" id="cvv" name="cvv" required />
         </fieldset>
 
-        <fieldset>
+        <fieldset class="checkout-summary">
           <legend>Order Summary</legend>
           <p>Item Subtotal (<span id="num-items"></span>)</p>
           <p name="cartTotal" id="cartTotal"></p>
           <p>Shipping Estimate: <span id="shipping-estimate">$0.00</span></p>
           <p>Tax: <span id="tax">$0.00</span></p>
-          <p><strong>Order Total: <span id="order-total">$0.00</span></strong></p>
+          <p><strong>Order Total: <span id="orderTotal">$0.00</span></strong></p>
         </fieldset>
 
         <button type="submit">Checkout</button>

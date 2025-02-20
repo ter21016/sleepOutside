@@ -1,5 +1,5 @@
 import { getLocalStorage } from "./utils.mjs";  
-
+import { checkout } from "./externalServices.mjs";  
 
 const checkoutProcess = {
     key: "",
@@ -17,7 +17,7 @@ const checkoutProcess = {
     },
   calculateItemSummary: function() {
     // calculate and display the total amount of the items in the cart, and the number of items.
-    const itemNumElement = document.querySelector(this.outputSelector + " #item-number");
+    const itemNumElement = document.querySelector(this.outputSelector + " #num-items");
     const summaryElement = document.querySelector(this.outputSelector + " #cartTotal");
 
     itemNumElement.innerHTML = this.list.length;
@@ -43,15 +43,61 @@ const checkoutProcess = {
   },
   displayOrderTotals: function() {
     // once the totals are all calculated display them in the order summary page
-    const shipping = document.querySelector(this.outputSelector + " #shipping");
+    const shipping = document.querySelector(this.outputSelector + " #shipping-estimate");
     const tax = document.querySelector(this.outputSelector + " #tax");
-    const orderTotal = document.querySelector(
-      this.outputSelector + " #orderTotal"
-    );
+    const orderTotal = document.querySelector(this.outputSelector + " #orderTotal");
+    
     shipping.innerText = "$" + this.shipping;
     tax.innerText = "$" + this.tax;
     orderTotal.innerText = "$" + this.orderTotal;
-  }
+  },
+  checkout: async function (form) {
+    const json = formDataToJSON(form);
+    // add totals, and item details
+    json.orderDate = new Date();
+    json.orderTotal = this.orderTotal;
+    json.tax = this.tax;
+    json.shipping = this.shipping;
+    json.items = packageItems(this.list);
+    // eslint-disable-next-line no-console
+    console.log(json);
+    try {
+      const res = await checkout(json);
+      // eslint-disable-next-line no-console
+      console.log(res);
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
+    }
+  },
   
 }
+
+// takes a form element and returns an object where the key is the "name" of the form input.
+function formDataToJSON(formElement) {
+  const formData = new FormData(formElement),
+    convertedJSON = {};
+
+  formData.forEach(function (value, key) {
+    convertedJSON[key] = value;
+  });
+
+  return convertedJSON;
+}
+
+function packageItems(items) {
+  const simplifiedItems = items.map((item) => {
+    // eslint-disable-next-line no-console
+    console.log(item);
+    return {
+      id: item.Id,
+      price: item.FinalPrice,
+      name: item.Name,
+      quantity: 1,
+    };
+  });
+  return simplifiedItems;
+}
+
+
 export default checkoutProcess;
