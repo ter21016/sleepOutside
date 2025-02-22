@@ -73,9 +73,10 @@ function updateCartFooter() {
 }
 
 function cartItemTemplate(item, index) {
+  const imageUrl = item.Images && item.Images.PrimaryMedium ? item.Images.PrimaryMedium : "path/to/default-image.jpg";
   return `<li class="cart-card divider">
-    <a href="#" class="cart-card__image">
-      <img src="${item.Image}" alt="${item.Name}" />
+    <a href="../product_pages/index.html?product=${item.Id}" class="cart-card__image">
+      <img src="${imageUrl}" alt="${item.Name}" />
     </a>
     <a href="#">
       <h2 class="card__name">${item.Name}</h2>
