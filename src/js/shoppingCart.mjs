@@ -56,9 +56,10 @@ function removeCartItem(index) {
 }
 
 function cartItemTemplate(item, index) {
+  const imageUrl = item.Images && item.Images.PrimaryMedium ? item.Images.PrimaryMedium : "path/to/default-image.jpg";
   return `<li class="cart-card divider">
     <a href="#" class="cart-card__image">
-      <img src="${item.Images?.PrimaryMedium || item.Image || ''}" alt="${item.Name}">
+      <img src="${item.Image}" alt="${item.Name}" />
     </a>
     <a href="#">
       <h2 class="card__name">${item.Name}</h2>
