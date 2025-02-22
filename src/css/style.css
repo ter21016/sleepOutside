@@ -349,8 +349,8 @@ footer {
 }
 
 .discount-badge {
-  background-color: red;
-  color: white;
+  /*background-color: red;*/
+  color: red;
   padding: 5px;
   border-radius: 5px;
   font-size: 0.8em;
