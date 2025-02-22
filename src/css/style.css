@@ -420,3 +420,13 @@ footer {
 .checkout-form input:valid {
   border-color: green;
 }
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summary-item p {
+  margin: 0;
+}

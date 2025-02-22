@@ -14,6 +14,7 @@ const checkoutProcess = {
         this.outputSelector = outputSelector;
         this.list = getLocalStorage(key);
         this.calculateItemSummary();
+        this.calculateOrdertotal();
     },
   calculateItemSummary: function() {
     // calculate and display the total amount of the items in the cart, and the number of items.
