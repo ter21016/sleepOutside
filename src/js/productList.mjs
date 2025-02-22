@@ -1,4 +1,4 @@
-import { getData } from "./productData.mjs";
+import { getProductByCategory } from "./externalServices.mjs";
 import { renderListWithTemplate } from "./utils.mjs";
 
 // Tent IDs that we need to display
@@ -30,7 +30,7 @@ function productCardTemplate(product) {
 // Fetch, filter, and render the list of products
 export default async function productList(selector, category) {
   const el = document.querySelector(selector);
-  let products = await getData(category); 
+  let products = await getProductByCategory(category); 
   //products = filterTents(products);      
   renderListWithTemplate(productCardTemplate, el, products); 
   document.querySelector(".title").innerHTML = category;
