@@ -92,6 +92,11 @@ button {
   cursor: pointer;
 }
 
+button a {
+  color: white;
+  text-decoration: none;
+}
+
 /* Cart bounce animation */
 @keyframes cart-bounce {
   0%, 100% {
