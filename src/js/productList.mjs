@@ -1,14 +1,6 @@
 import { getProductByCategory } from "./externalServices.mjs";
 import { renderListWithTemplate } from "./utils.mjs";
 
-// Tent IDs that we need to display
-//const REQUIRED_TENT_IDS = ["880RR", "985RF", "985PR", "344YJ"];
-
-// Filter products to only include required tent IDs
-//function filterTents(products) {
-  //return products.filter(product => REQUIRED_TENT_IDS.includes(product.Id));
-//}
-
 // Template for each product card
 function productCardTemplate(product) {
   const discountPercentage = Math.round((product.ListPrice - product.FinalPrice) / product.ListPrice * 100);

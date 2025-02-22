@@ -1,5 +1,5 @@
 import { loadHeaderFooter } from "./utils.mjs";
-import checkoutProcess  from "./checkoutProcess.mjs";   
+import checkoutProcess from "./checkoutProcess.mjs";
 
 loadHeaderFooter();
 
@@ -18,15 +18,3 @@ document.forms["checkout-form"].addEventListener("submit", (e) => {
   // e.target would contain our form in this case
   checkoutProcess.checkout(e.target);
 });
-
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     checkoutProcess.init("so-cart", ".checkout-form");
-  
-//     // Add form submit listener
-//     const form = document.querySelector(".checkout-form");
-//     form.addEventListener("submit", (event) => {
-//       event.preventDefault();
-//       checkoutProcess.checkout(form);
-//     });
-//   });

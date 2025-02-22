@@ -26,24 +26,3 @@ export async function showAlertFromJson() {
       console.error("Error fetching alerts:", error);
     }
 }
-
-/*export function showAlert(message, background = "info", color = "white") {
-    const alertContainer = document.createElement("div");
-    alertContainer.className = `alert`;
-    alertContainer.textContent = message;
-    alertContainer.style.backgroundColor = background;
-    alertContainer.style.color = color;
-  
-    document.body.appendChild(alertContainer);
-  
-    // Automatically hide the alert after 5 seconds
-    setTimeout(() => {
-      hideAlert(alertContainer);
-    }, 5000);
-}
-  
-export function hideAlert(alertElement) {
-    if (alertElement) {
-      alertElement.remove();
-    }
-}*/

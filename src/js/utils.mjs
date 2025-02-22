@@ -10,10 +10,12 @@ export function qs(selector, parent = document) {
 export function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
 }
+
 // save data to local storage
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
+
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
   qs(selector).addEventListener("touchend", (event) => {
@@ -55,7 +57,6 @@ export function animateCartIcon() {
   }, 500);
 }
 
-
 export async function renderWithTemplate(
   templateFn, parentElement, data, callback, position = "afterbegin", clear = true
 ) {
@@ -93,13 +94,6 @@ function getCartItemCount() {
   return cartItems.length;
 }
 
-// Function to update the cart count
-// export function updateCartCount() {
-//   const cartCountElement = document.querySelector(".cart-count");
-//   const itemCount = getCartItemCount();
-//   cartCountElement.textContent = itemCount;
-// }
-
 export function updateCartCount() {
   const cartCountElement = document.querySelector(".cart-count");
   // eslint-disable-next-line no-console
@@ -111,7 +105,6 @@ export function updateCartCount() {
     cartCountElement.textContent = itemCount;
   }
 }
-
 
 export async function loadHeaderFooter() {
   const headerTemplate = loadTemplate("/partials/header.html");
@@ -125,6 +118,3 @@ export async function loadHeaderFooter() {
 
   updateCartCount();
 }
-
-
-

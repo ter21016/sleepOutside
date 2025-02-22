@@ -8,22 +8,11 @@ function convertToJson(res) {
   }
 }
 
-// export function getData(category = "tents") {
-//   return fetch(`../json/${category}.json`)
-//     .then(convertToJson)
-//     .then((data) => data);
-// }
-
 export async function getProductByCategory(category) {
   const response = await fetch(baseURL + `products/search/${category}`);
   const data = await convertToJson(response);
   return data.Result;
 }
-
-// export async function findProductById(id) {
-//   const products = await getData();
-//   return products.find((item) => item.Id === id);
-// }
 
 export async function findProductById(id) {
   const response = await fetch(baseURL + `product/${id}`);
@@ -40,5 +29,4 @@ export async function checkout(payload) {
     body: JSON.stringify(payload),
   };
   return await fetch(baseURL + "checkout/", options).then(convertToJson);
-  //return await fetch("http://server-nodejs.cit.byui.edu:3000/checkout", options).then(convertToJson);
 }

@@ -1,94 +1,75 @@
-import { getLocalStorage, setLocalStorage, animateCartIcon, updateCartCount } from "./utils.mjs";
+import {getLocalStorage, setLocalStorage, animateCartIcon, updateCartCount, renderListWithTemplate} from "./utils.mjs";
 
 export default function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
-  const cartList = document.querySelector(".product-list");
-
+  const cartList = document.querySelector('.product-list');
+  
   animateCartIcon();
+  updateCartCount();
 
-  if (cartItems.length > 0) {
-    // Build and set HTML in one go
-    const htmlItems = cartItems
-      .map((item, index) => cartItemTemplate(item, index))
-      .join("");
-    cartList.innerHTML = htmlItems;
+  renderListWithTemplate(cartItemTemplate, cartList, cartItems);
+  updateCartFooter(cartItems);
 
-    // Add checkout button
-    const checkoutButton = `<button class="checkout-btn">Checkout</button>`;
-    cartList.insertAdjacentHTML("beforeend", checkoutButton);
-  } else {
-    cartList.innerHTML = "<p>Your cart is empty.</p>";
-  }
-
-  attachRemoveHandlers();
-  attachCheckoutHandler();
+  attachEventHandlers();
 }
 
-function attachRemoveHandlers() {
-  const removeButtons = document.querySelectorAll(".remove-item-btn");
-  removeButtons.forEach((button) => {
-    button.addEventListener("click", (event) => {
-      const index = event.target.dataset.index;
+function updateCartFooter(items) {
+  const cartFooter = document.querySelector('.cart-footer');
+  const total = items.reduce((sum, item) => sum + (item.FinalPrice || 0), 0);
+  
+  const totalElement = document.querySelector('.cart-total');
+  const checkoutBtn = document.querySelector('.checkout-btn');
+  
+  if (items.length > 0) {
+    cartFooter.classList.remove('hide');
+    totalElement.textContent = `Total: $${total.toFixed(2)}`;
+    
+    if (!checkoutBtn) {
+      cartFooter.insertAdjacentHTML('beforeend', '<button class="checkout-btn">Checkout</button>');
+    }
+  } else {
+    cartFooter.classList.add('hide');
+    checkoutBtn?.remove();
+  }
+}
+
+function attachEventHandlers() {
+  // Remove items
+  document.querySelectorAll('.remove-item-btn').forEach(button => {
+    button.addEventListener('click', (e) => {
+      const index = e.target.dataset.index;
       removeCartItem(index);
     });
   });
-}
 
-function attachCheckoutHandler() {
-  const checkoutButton = document.querySelector(".checkout-btn");
-  if (checkoutButton) {
-    checkoutButton.addEventListener("click", () => {
-      window.location.href = "../checkout/index.html";
-    });
-  }
+  // Checkout
+  document.querySelector('.checkout-btn')?.addEventListener('click', () => {
+    window.location.href = "../checkout/index.html";
+  });
 }
 
 function removeCartItem(index) {
-  let cartItems = getLocalStorage("so-cart") || [];
-  cartItems.splice(index, 1); // Remove the selected item
+  const cartItems = getLocalStorage("so-cart") || [];
+  cartItems.splice(index, 1);
   setLocalStorage("so-cart", cartItems);
   renderCartContents();
-  updateCartFooter();
-  updateCartCount();
-}
-
-function updateCartFooter() {
-  const cartItems = getLocalStorage("so-cart") || [];
-  const cartFooter = document.querySelector(".cart-footer");
-
-  if (cartItems.length > 0) {
-    cartFooter.classList.remove("hide");
-
-    // Calculate and update total price
-    const totalPrice = cartItems.reduce(
-      (total, item) => total + item.FinalPrice,
-      0
-    );
-    document.querySelector(
-      ".cart-total"
-    ).textContent = `Total: $${totalPrice.toFixed(2)}`;
-  } else {
-    cartFooter.classList.add("hide");
-  }
 }
 
 function cartItemTemplate(item, index) {
   return `<li class="cart-card divider">
     <a href="#" class="cart-card__image">
-      <img src="${item.Image}" alt="${item.Name}" />
+      <img src="${item.Images?.PrimaryMedium || item.Image || ''}" alt="${item.Name}">
     </a>
     <a href="#">
       <h2 class="card__name">${item.Name}</h2>
     </a>
-    <p class="cart-card__color">${item.Colors[0].ColorName}</p>
+    <p class="cart-card__color">${item.Colors?.[0]?.ColorName || ''}</p>
     <p class="cart-card__quantity">qty: 1</p>
-    <p class="cart-card__price">$${item.FinalPrice}</p>
+    <p class="cart-card__price">$${(item.FinalPrice || 0).toFixed(2)}</p>
     <button class="remove-item-btn" data-index="${index}">Remove</button>
   </li>`;
 }
 
-// Initialize cart rendering
 document.addEventListener("DOMContentLoaded", () => {
   renderCartContents();
-  updateCartFooter();
 });

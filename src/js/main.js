@@ -1,9 +1,3 @@
-// import productList from "./productList.mjs";
-
-// productList(".product-list", "tents");
-
-//import { updateCartCount } from "./utils.mjs";
-
 import productList from "./productList.mjs";
 import { loadHeaderFooter, updateCartCount } from "./utils.mjs";
 
@@ -11,6 +5,5 @@ loadHeaderFooter();
 
 productList("#product-container", "tents");
 
-
-// Call the updateCartCount function 
+// Call the updateCartCount function
 updateCartCount();

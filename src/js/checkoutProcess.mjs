@@ -100,5 +100,4 @@ function packageItems(items) {
   return simplifiedItems;
 }
 
-
 export default checkoutProcess;
