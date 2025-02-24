@@ -490,3 +490,23 @@ footer {
 .summary-item p {
   margin: 0;
 }
+
+/* Style for the original price */
+/*.product-card__price {
+  font-size: 1.2em;
+  color: #333;
+  text-decoration: line-through;
+  margin-right: 10px;
+}*/
+
+/* Style for the discounted price */
+.product__discount {
+  font-size: 1.2em;
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+/* Hide the discount element by default */
+.product__discount.hide {
+  display: none;
+}
