@@ -3,10 +3,25 @@ import { findProductById } from "./externalServices.mjs";
 
 function addProductToCart(product) {
   const currentCart = getLocalStorage("so-cart") || [];
-  currentCart.push(product);
+  
+  // Check if the product is already in the cart
+  const existingProductIndex = currentCart.findIndex(
+    (item) => item.Id === product.Id
+  );
+
+  if (existingProductIndex !== -1) {
+    // Product exists in the cart, increment its quantity
+    currentCart[existingProductIndex].quantity = (currentCart[existingProductIndex].quantity || 1) + 1;
+  } else {
+    // Product does not exist in the cart, add it with a default quantity of 1
+    product.quantity = 1;
+    currentCart.push(product);
+  }
+
+  // Save the updated cart back to local storage
   setLocalStorage("so-cart", currentCart);
 
-  // Trigger cart icon animation
+  // Trigger cart icon animation and update cart count
   animateCartIcon();
   updateCartCount();
 }
