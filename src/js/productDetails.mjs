@@ -25,10 +25,28 @@ function addProductToCart(product) {
   animateCartIcon();
   updateCartCount();
 }
+
 export default async function productDetails(productId) {
-  const product = await findProductById(productId);
-  renderProductDetails(product);
+  try {
+    const product = await findProductById(productId);
+    renderProductDetails(product);
+  } catch (error) {
+    displayErrorMessage("The requested product does not exist.");
+  }
 }
+
+function displayErrorMessage(message) {
+  const productDetailContainer = document.querySelector(".product-detail");
+  if (productDetailContainer) {
+    productDetailContainer.innerHTML = `
+      <div class="error-message">
+        <p>${message}</p>
+        <p><a href=/><< Back to home</a></p>
+      </div>
+    `;
+  }
+}
+
 function renderProductDetails(product) {
   // set basic content
   setContent("#productName", product.Brand.Name);
