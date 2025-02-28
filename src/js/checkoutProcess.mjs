@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";  
+import { alertMessage, removeAllAlerts, getLocalStorage, setLocalStorage } from "./utils.mjs";  
 import { checkout } from "./externalServices.mjs";  
 
 const checkoutProcess = {
@@ -16,22 +16,19 @@ const checkoutProcess = {
         this.calculateItemSummary();
         this.calculateOrdertotal();
     },
-    calculateItemSummary: function () {
-      // Calculate and display the total amount of the items in the cart, and the number of items.
-      const itemNumElement = document.querySelector(this.outputSelector + " #num-items");
-      const summaryElement = document.querySelector(this.outputSelector + " #cartTotal");
+  calculateItemSummary: function() {
+    // calculate and display the total amount of the items in the cart, and the number of items.
+    const itemNumElement = document.querySelector(this.outputSelector + " #num-items");
+    const summaryElement = document.querySelector(this.outputSelector + " #cartTotal");
+
+    itemNumElement.innerHTML = this.list.length;
+
+    // calculate the total amount of the items in the cart
+    const amounts = this.list.map((item) => item.FinalPrice);
+    this.itemTotal = amounts.reduce((sum, item) => sum + item, 0);
+    summaryElement.innerText = "$" + this.itemTotal;
     
-      // Calculate the total quantity of items in the cart
-      const totalQuantity = this.list.reduce((sum, item) => sum + (item.quantity || 1), 0);
-      itemNumElement.innerHTML = totalQuantity;
-    
-      // Calculate the total amount of the items in the cart, considering quantities
-      this.itemTotal = this.list.reduce(
-        (sum, item) => sum + (item.FinalPrice * (item.quantity || 1)),
-        0
-      );
-      summaryElement.innerText = "$" + this.itemTotal.toFixed(2);
-    },
+  },
   calculateOrdertotal: function() {
     // calculate the shipping and tax amounts. Then use them to along with the cart total to figure out the order total
     this.shipping = 10 + (this.list.length - 1) * 2;
@@ -66,12 +63,18 @@ const checkoutProcess = {
     // eslint-disable-next-line no-console
     console.log(json);
     try {
-      const res = await checkout(json);
-      // eslint-disable-next-line no-console
-      console.log(res);
+       const res = await checkout(json);
+       // eslint-disable-next-line no-console
+       console.log(res);
+       setLocalStorage("so-cart", []);
+       location.assign("/checkout/success.html");
     } catch (err) {
       // eslint-disable-next-line no-console
       console.log(err);
+      removeAllAlerts();
+      for (let message in err.message) {
+        alertMessage(err.message[message]);
+      }
     }
   },
   
