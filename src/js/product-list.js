@@ -5,12 +5,14 @@ loadHeaderFooter();
 
 const category = getParam("category");
 
-productList(".product-list", category);
+productList(".product-list", category).then(() => {
+  updateCartCount(); // Ensures cart count updates after rendering
+});
 
-//added product-search
+// Search functionality
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("product-search");
-  const productListElement = document.querySelector(".product-list"); // Renamed variable
+  const productListElement = document.querySelector(".product-list");
 
   searchInput.addEventListener("input", (event) => {
     const query = event.target.value.toLowerCase();
@@ -18,17 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function filterProducts(query) {
-    const products = Array.from(productListElement.children); // Updated variable name
+    const products = Array.from(productListElement.children);
     products.forEach((product) => {
       const productName = product.textContent.toLowerCase();
-      if (productName.includes(query)) {
-        product.style.display = "";
-      } else {
-        product.style.display = "none";
-      }
+      product.style.display = productName.includes(query) ? "" : "none";
     });
   }
 });
-
-// Call the updateCartCount function
-updateCartCount();

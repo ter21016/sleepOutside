@@ -3,7 +3,7 @@ import { loadHeaderFooter, updateCartCount } from "./utils.mjs";
 
 loadHeaderFooter();
 
-productList("#product-container", "tents");
-
-// Call the updateCartCount function
-updateCartCount();
+// Fixed selector to match the actual product list container
+productList(".product-list", "tents").then(() => {
+  updateCartCount(); // Ensures cart count updates after rendering
+});
