@@ -510,3 +510,31 @@ footer {
 .product__discount.hide {
   display: none;
 }
+/* Alert message */
+.alert {
+  background-color: rgb(239, 167, 59);
+  color: black;
+  border: 1px solid rgb(182, 115, 14);
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.alert-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.alert-message {
+  flex-grow: 1;
+}
+
+.alert-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #721c24;
+}

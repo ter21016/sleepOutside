@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";  
+import { alertMessage, removeAllAlerts, getLocalStorage, setLocalStorage } from "./utils.mjs";  
 import { checkout } from "./externalServices.mjs";  
 
 const checkoutProcess = {
@@ -25,7 +25,7 @@ const checkoutProcess = {
 
     // calculate the total amount of the items in the cart
     const amounts = this.list.map((item) => item.FinalPrice);
-    this.itemTotal = amounts.reduce((sum, item) => sum + item);
+    this.itemTotal = amounts.reduce((sum, item) => sum + item, 0);
     summaryElement.innerText = "$" + this.itemTotal;
     
   },
@@ -63,12 +63,18 @@ const checkoutProcess = {
     // eslint-disable-next-line no-console
     console.log(json);
     try {
-      const res = await checkout(json);
-      // eslint-disable-next-line no-console
-      console.log(res);
+       const res = await checkout(json);
+       // eslint-disable-next-line no-console
+       console.log(res);
+       setLocalStorage("so-cart", []);
+       location.assign("/checkout/success.html");
     } catch (err) {
       // eslint-disable-next-line no-console
       console.log(err);
+      removeAllAlerts();
+      for (let message in err.message) {
+        alertMessage(err.message[message]);
+      }
     }
   },
   
