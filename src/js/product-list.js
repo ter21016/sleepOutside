@@ -1,13 +1,25 @@
 import productList from "./productList.mjs";
-import { loadHeaderFooter, updateCartCount, getParam } from "./utils.mjs";
+import { loadHeaderFooter, updateCartCount, getParam, updateBreadcrumb } from "./utils.mjs";
 
 loadHeaderFooter();
 
 const category = getParam("category");
 
-productList(".product-list", category).then(() => {
-  updateCartCount(); // Ensures cart count updates after rendering
-});
+// Load products and update breadcrumb
+productList(".product-list", category)
+  .then((products) => {
+    if (!products || !Array.isArray(products)) {
+      throw new Error("Invalid product data received");
+    }
+
+    updateCartCount();
+    updateBreadcrumb(category, "", products.length); // Ensure products is valid
+  })
+  .catch((error) => {
+    
+    updateBreadcrumb(category, "", 0); // Show breadcrumb with 0 items
+  });
+
 
 // Search functionality
 document.addEventListener("DOMContentLoaded", () => {

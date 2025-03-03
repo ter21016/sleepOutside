@@ -89,6 +89,39 @@ header {
   margin-top: -1.7em;
 }
 
+.breadcrumb {
+  font-size: 14px;
+  margin: 10px 0;
+  padding: 5px 15px;
+  background-color: #f7f7f7;
+  border-radius: 5px;
+}
+
+.breadcrumb ol {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 5px;
+}
+
+.breadcrumb li {
+  display: inline;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  color: #0077cc;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.hide {
+  display: none;
+}
+
+
 /* utility classes */
 .highlight {
   color: var(--tertiary-color);
