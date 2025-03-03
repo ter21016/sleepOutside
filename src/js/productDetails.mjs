@@ -60,6 +60,13 @@ function renderProductDetails(product) {
     const discountedPrice = product.SuggestedRetailPrice - product.FinalPrice;
     setContent("#productDiscountedPrice", `$${discountedPrice.toFixed(2)} (${discountPercentage.toFixed(0)}% off)`);
     qs("#productDiscount").classList.remove("hide");
+
+    // Add discount flag
+    const discountFlag = document.createElement("div");
+    discountFlag.classList.add("discount-flag");
+    discountFlag.innerText = `${discountPercentage.toFixed(0)}% OFF`;
+
+    qs(".product-detail").appendChild(discountFlag);
   } else {
     qs("#productDiscount").classList.add("hide");
   }
