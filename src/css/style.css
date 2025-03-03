@@ -564,3 +564,16 @@ footer {
   cursor: pointer;
   color: #721c24;
 }
+
+.discount-flag {
+  background-color: #ff0000;
+  color: #ffffff;
+  padding: 10px;
+  position: absolute;
+  top: 80px;
+  right: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+

@@ -123,6 +123,7 @@ export function alertMessage(message, scroll = true) {
   // Create the alert element
   const alert = document.createElement("div");
   alert.classList.add("alert");
+
   alert.innerHTML = `
     <div class="alert-content">
       <span class="alert-message">${message}</span>
@@ -130,9 +131,15 @@ export function alertMessage(message, scroll = true) {
     </div>
   `;
 
+  // Add event listener to close the alert
+  alert.querySelector(".alert-close").addEventListener("click", () => {
+    alert.remove();
+  });
+
   // Insert the alert at the top of the main element
   const main = document.querySelector("main");
-  main.insertAdjacentElement("afterbegin", alert);
+  main.prepend(alert);
+  //main.insertAdjacentElement("afterbegin", alert);
 
   // Scroll to the top if the scroll parameter is true
   if (scroll) {
