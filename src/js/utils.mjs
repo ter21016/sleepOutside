@@ -106,6 +106,30 @@ export function updateCartCount() {
   }
 }
 
+export function updateBreadcrumb(category = "", productName = "", productCount = 0) {
+  const breadcrumbNav = document.getElementById("breadcrumb");
+  const breadcrumbCategory = document.getElementById("breadcrumb-category");
+  const breadcrumbCount = document.getElementById("breadcrumb-count");
+
+  if (!breadcrumbNav || !breadcrumbCategory || !breadcrumbCount) return;
+
+  if (!category) {
+    // Hide breadcrumb on the home page
+    breadcrumbNav.classList.add("hide");
+  } else if (productName) {
+    // Breadcrumb for product details page: Show category only
+    breadcrumbNav.classList.remove("hide");
+    breadcrumbCategory.innerHTML = `<a href="/product-list.html?category=${category}">${category}</a>`;
+    breadcrumbCount.textContent = `-> ${productName}`;
+  } else {
+    // Breadcrumb for category page: Show category & product count
+    breadcrumbNav.classList.remove("hide");
+    breadcrumbCategory.textContent = category;
+    breadcrumbCount.textContent = `-> (${productCount} items)`;
+  }
+}
+
+
 export async function loadHeaderFooter() {
   const headerTemplate = loadTemplate("/partials/header.html");
   const footerTemplate = loadTemplate("/partials/footer.html");

@@ -1,4 +1,4 @@
-import { setLocalStorage, getLocalStorage, animateCartIcon, qs, setContent, updateCartCount} from "./utils.mjs";
+import { setLocalStorage, getLocalStorage, animateCartIcon, qs, setContent, updateCartCount, updateBreadcrumb} from "./utils.mjs";
 import { findProductById } from "./externalServices.mjs";
 
 function addProductToCart(product) {
@@ -30,10 +30,14 @@ export default async function productDetails(productId) {
   try {
     const product = await findProductById(productId);
     renderProductDetails(product);
+
+    // Update breadcrumb with category & product name
+    updateBreadcrumb(product.Category, product.NameWithoutBrand);
   } catch (error) {
     displayErrorMessage("The requested product does not exist.");
   }
 }
+
 
 function displayErrorMessage(message) {
   const productDetailContainer = document.querySelector(".product-detail");
@@ -79,3 +83,4 @@ function renderProductDetails(product) {
     addProductToCart.bind(null, product)
   );
 }
+
