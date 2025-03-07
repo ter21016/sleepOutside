@@ -121,7 +121,6 @@ header {
   display: none;
 }
 
-
 /* utility classes */
 .highlight {
   color: var(--tertiary-color);
@@ -208,7 +207,7 @@ button {
   outline: none;
 }
 
-*/ .mission {
+.mission {
   padding: 0 0.5em;
   /* margin: 0.5em 0; */
   line-height: 1.3;
@@ -609,4 +608,3 @@ footer {
   font-weight: bold;
   border-radius: 5px;
 }
-
