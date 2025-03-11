@@ -57,6 +57,5 @@ export async function getOrders(token) {
     },
   };
   const response = await fetch(baseURL + "orders", options).then(convertToJson);
-  console.log("Server awnser:", response);
   return response;
 }

@@ -608,3 +608,59 @@ footer {
   font-weight: bold;
   border-radius: 5px;
 }
+
+/* Orders Page */
+/* Table Styling */
+#orders {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#orders thead tr {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  text-align: left;
+}
+
+#orders th,
+#orders td {
+  padding: 12px 15px;
+}
+
+#orders tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+#orders tbody tr:nth-of-type(even) {
+  background-color: #f3f4f6;
+}
+
+#orders tbody tr:last-of-type {
+  border-bottom: 2px solid var(--primary-color);
+}
+
+/* Responsive styling */
+@media (max-width: 600px) {
+  #orders {
+    font-size: 0.8em;
+  }
+  
+  #orders th,
+  #orders td {
+    padding: 8px 10px;
+  }
+}
+
+/* Empty state styling */
+.order-body:empty::after {
+  content: "No orders found";
+  display: block;
+  text-align: center;
+  padding: 20px;
+  color: var(--dark-grey);
+  font-style: italic;
+}

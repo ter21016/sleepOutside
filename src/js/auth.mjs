@@ -18,7 +18,7 @@ function isTokenValid(token) {
       return false;
     } else {
       // token not expired
-      console.log("Valid token");
+      console.log("Valid token >:D");
       return true;
     }
     //no token...automatically return false.
@@ -49,7 +49,7 @@ export function checkLogin() {
 export async function login(creds, redirect = "/") {
   try {
     const token = await loginRequest(creds);
-    console.log("Token:", token); //test
+    console.log("Token used:", token); //test
     setLocalStorage(tokenKey, token);
     window.location = redirect;
   } catch (err) {

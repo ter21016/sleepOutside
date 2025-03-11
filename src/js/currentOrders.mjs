@@ -20,6 +20,11 @@ function orderTemplate(order) {
 
   return `<tr><td>${order.id}</td>
   <td>${new Date(order.orderDate).toLocaleDateString("en-US")}</td>
-  <td>${order.items.length}</td>
-  <td>${order.orderTotal}</td></tr>`;
+  <td>${order.items?.length || 0}</td>
+  <td>${
+    new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD"
+    }).format(order.orderTotal ?? 0)
+  }</td></tr>`;
 }
