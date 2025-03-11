@@ -1,5 +1,10 @@
 import productList from "./productList.mjs";
-import { loadHeaderFooter, updateCartCount, getParam, updateBreadcrumb } from "./utils.mjs";
+import {
+  loadHeaderFooter,
+  updateCartCount,
+  getParam,
+  updateBreadcrumb,
+} from "./utils.mjs";
 
 loadHeaderFooter();
 
@@ -16,10 +21,8 @@ productList(".product-list", category)
     updateBreadcrumb(category, "", products.length); // Ensure products is valid
   })
   .catch((error) => {
-    
     updateBreadcrumb(category, "", 0); // Show breadcrumb with 0 items
   });
-
 
 // Search functionality
 document.addEventListener("DOMContentLoaded", () => {
