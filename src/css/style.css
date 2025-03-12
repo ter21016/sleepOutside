@@ -163,6 +163,15 @@ button {
 
 /* End utility classes */
 
+.login {
+  padding-top: 1em;
+  position: relative;
+  text-align: center;
+}
+
+.highlight {
+  color: var(--tertiary-color);
+}
 /* Cart icon styles */
 .cart {
   padding-top: 1em;
