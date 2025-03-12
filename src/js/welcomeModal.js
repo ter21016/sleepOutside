@@ -1,9 +1,9 @@
 export function showWelcomeModal() {
-    localStorage.removeItem('visited');
-    // Check if this is the first visit
-    if (!localStorage.getItem('visited')) {
-      // Create modal HTML
-      const modalHTML = `
+  localStorage.removeItem("visited");
+  // Check if this is the first visit
+  if (!localStorage.getItem("visited")) {
+    // Create modal HTML
+    const modalHTML = `
         <div class="welcome-modal">
           <div class="modal-content">
             <h2>Welcome to SleepOutside!</h2>
@@ -18,16 +18,16 @@ export function showWelcomeModal() {
           </div>
         </div>
       `;
-      
-      // Add modal to the page
-      document.body.insertAdjacentHTML('beforeend', modalHTML);
-      
-      // Add event listener for closing modal
-      document.getElementById('closeModal').addEventListener('click', () => {
-        document.querySelector('.welcome-modal').remove();
-      });
-      
-      // Set visited flag in localStorage
-      localStorage.setItem('visited', true);
-    }
+
+    // Add modal to the page
+    document.body.insertAdjacentHTML("beforeend", modalHTML);
+
+    // Add event listener for closing modal
+    document.getElementById("closeModal").addEventListener("click", () => {
+      document.querySelector(".welcome-modal").remove();
+    });
+
+    // Set visited flag in localStorage
+    localStorage.setItem("visited", true);
+  }
 }

@@ -438,30 +438,35 @@ header {
 }
 
 /* ==================== CHECKOUT AND LOGIN FORM ==================== */
-.checkout-form, .login-form {
+.checkout-form,
+.login-form {
   margin-bottom: 21.6px;
 }
 
-.checkout-form fieldset, .login-form fieldset {
+.checkout-form fieldset,
+.login-form fieldset {
   margin: 2rem 0;
   border: 1px solid var(--light-grey);
   border-radius: 6px;
   padding: 0.5rem 2%;
 }
 
-.checkout-form legend, .login-form legend {
+.checkout-form legend,
+.login-form legend {
   padding: 0 10px;
   font-size: 1.2em;
   color: var(--secondary-color);
 }
 
-.checkout-form label, .login-form label {
+.checkout-form label,
+.login-form label {
   display: block;
   padding-top: 1rem;
   font-size: 0.9rem;
 }
 
-.checkout-form input[type="text"], .login-form input {
+.checkout-form input[type="text"],
+.login-form input {
   border: solid 1px var(--light-grey);
   border-radius: 6px;
   padding: 0.75rem;
@@ -471,11 +476,13 @@ header {
   background-color: #eee;
 }
 
-.checkout-form input:required, .login-form input:required {
+.checkout-form input:required,
+.login-form input:required {
   border-right: solid 6px red;
 }
 
-.checkout-form input:valid, .login-form input:valid {
+.checkout-form input:valid,
+.login-form input:valid {
   border-color: green;
 }
 
@@ -654,4 +661,3 @@ footer {
     padding: 8px 10px;
   }
 }
-

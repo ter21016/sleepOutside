@@ -5,7 +5,7 @@ import { showWelcomeModal } from "./welcomeModal.js";
 loadHeaderFooter();
 const redirect = getParam("redirect") || "/";
 
-showWelcomeModal(); 
+showWelcomeModal();
 
 document.querySelector("#login").addEventListener("click", () => {
   event.preventDefault(); // This prevents the form from submitting
