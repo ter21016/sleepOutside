@@ -26,7 +26,8 @@ const checkoutProcess = {
     // calculate the total amount of the items in the cart
     const amounts = this.list.map((item) => item.FinalPrice);
     this.itemTotal = amounts.reduce((sum, item) => sum + item, 0);
-    summaryElement.innerText = "$" + this.itemTotal;
+
+    summaryElement.innerText = "$" + this.itemTotal.toFixed(2);
     
   },
   calculateOrdertotal: function() {
@@ -48,7 +49,7 @@ const checkoutProcess = {
     const tax = document.querySelector(this.outputSelector + " #tax");
     const orderTotal = document.querySelector(this.outputSelector + " #orderTotal");
     
-    shipping.innerText = "$" + this.shipping;
+    shipping.innerText = "$" + this.shipping.toFixed(2);
     tax.innerText = "$" + this.tax;
     orderTotal.innerText = "$" + this.orderTotal;
   },

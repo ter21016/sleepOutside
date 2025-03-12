@@ -32,7 +32,7 @@ img {
 header {
   display: flex;
   justify-content: space-between;
-  padding: 0 10px;
+  padding: 2px 10px;
 }
 
 .logo {
@@ -648,7 +648,7 @@ footer {
   #orders {
     font-size: 0.8em;
   }
-  
+
   #orders th,
   #orders td {
     padding: 8px 10px;
