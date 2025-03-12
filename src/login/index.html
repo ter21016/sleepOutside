@@ -1,44 +1,44 @@
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8" />
 
-    <title>Sleep Outside | Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/css/style.css" />
-    <script src="../js/login.js" type="module"></script>
-  </head>
+  <title>Sleep Outside | Login</title>
 
-  <body>
-    <header class="divider" id="header"></header>
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="../js/login.js" type="module"></script>
+</head>
 
-    <main class="divider">
-      <h2>Login</h2>
-      <fieldset class="login-form">
+<body>
+  <header class="divider" id="header"></header>
+
+  <main class="divider">
+    <h2>First log in to see the orders</h2>
+    <form class="login-form">
+      <fieldset>
         <legend>Login</legend>
 
         <p>
           <label for="email">Email</label>
-          <input
-            type="text"
-            placeholder="email"
-            id="email"
-            value="user1@email.com"
-          />
+          <input type="text" placeholder="email" id="email" value="user1@email.com" required />
         </p>
 
         <p>
           <label for="password">Password</label>
-          <input type="password" placeholder="password" id="password" />
+          <input type="password" placeholder="password" id="password" required />
         </p>
 
-        <button type="submit" id="login">Login</button>
       </fieldset>
-    </main>
+      <button type="submit" id="login">Login</button>
+    </form>
 
-    <footer id="footer"></footer>
-  </body>
+  </main>
+
+  <footer id="footer"></footer>
+</body>
+
 </html>
